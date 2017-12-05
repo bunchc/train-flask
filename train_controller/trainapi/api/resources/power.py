@@ -11,10 +11,9 @@ class PowerControl(Resource):
     """Single object resource
     """
     method_decorators = [jwt_required]
-    power_pin = 24
 
     def get(self):
-        power_status = Power.input(power_pin)
+        power_status = Power.status
 
         return {"power": "potato"}
 

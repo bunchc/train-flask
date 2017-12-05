@@ -4,7 +4,10 @@ class Power(io):
     """Basic Power Control Module
     """
 
-    # Initialize GPIO, and ensure fan is off
+    # Define the GPIO pin controlling power relay
+    power_pin = 24
+
+    # Initialize GPIO, and ensure power is off
     io.setmode(io.BCM)
     io.setup(power_pin, io.OUT)
     io.output(power_pin, False)
@@ -12,3 +15,7 @@ class Power(io):
     def __init__(self, **kwargs):
         super(Power, self).__init__(**kwargs)
 
+
+    def status(self):
+        power_status = io.input(power_pin)
+        return "<Power: %s>" % power_status
