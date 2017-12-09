@@ -1,4 +1,4 @@
-import RPi.GPIO as io
+from trainapi.extensions import io
 
 class Power(io):
     """Basic Power Control Module

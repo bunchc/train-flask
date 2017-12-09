@@ -3,5 +3,6 @@ from .power import Power
 
 
 __all__ = [
-    'User'
+    'User',
+    'Power'
 ]
