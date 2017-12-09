@@ -4,7 +4,7 @@ COPY . .
 
 RUN pip install -r /train_controller/requirements.txt
 RUN pip install -e /train_controller/.
-RUN trainapi init
+RUN sudo trainapi init
 
 EXPOSE 5000
 VOLUME [ "/train_controller/" ]
