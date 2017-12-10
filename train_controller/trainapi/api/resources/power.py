@@ -13,7 +13,7 @@ class PowerControl(Resource):
     method_decorators = [jwt_required]
 
     def get(self):
-        power_status = Power.status
+        power_status = Power.powerstatus
         return {"power": power_status}
 
     def put(self, power_status):

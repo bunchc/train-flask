@@ -3,12 +3,11 @@ from trainapi.extensions import io
 class Power():
     """Basic Power Control Module
     """
-    power_pin = 24
+    powerpin = 24
     io.setmode(io.BCM)
-    io.setup(power_pin, io.OUT)
-    io.output(power_pin, False)
+    io.setup(powerpin, io.OUT)
+    io.output(powerpin, False)
+    powerstatus = io.input(powerpin)
 
-
-    def status(self):
-        power_status = io.input(power_pin)
-        return power_status
+    def __repr__(self):
+        return "<Power %s>" % self.powerstatus
