@@ -3,18 +3,18 @@ from trainapi.extensions import io
 class Power(io):
     """Basic Power Control Module
     """
-
-    # Define the GPIO pin controlling power relay
     power_pin = 24
-
-    # Initialize GPIO, and ensure power is off
     io.setmode(io.BCM)
     io.setup(power_pin, io.OUT)
     io.output(power_pin, False)
 
 
-    def __init__(self, **kwargs):
-        super(Power, self).__init__(**kwargs)
+#    def __init__(self, **kwargs):
+#        super(Power, self).__init__(**kwargs)
+#
+#
+#    def __repr__(self):
+#        return "<Power %s>" % self.power_pin
 
 
     def status(self):
