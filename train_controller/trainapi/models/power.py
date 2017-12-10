@@ -1,6 +1,6 @@
 from trainapi.extensions import io
 
-class Power(io):
+class Power():
     """Basic Power Control Module
     """
     power_pin = 24
