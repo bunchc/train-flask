@@ -14,8 +14,7 @@ class PowerControl(Resource):
 
     def get(self):
         power_status = Power.status
-
-        return {"power": "potato"}
+        return {"power": power_status}
 
     def put(self, power_status):
         pass
