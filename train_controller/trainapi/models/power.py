@@ -7,7 +7,8 @@ class Power():
     io.setmode(io.BCM)
     io.setup(powerpin, io.OUT)
     io.output(powerpin, False)
-    powerstatus = io.input(powerpin)
+
 
     def __repr__(self):
-        return "<Power %s>" % self.powerstatus
+        powerstatus = io.input(powerpin)
+        return "<Power %s>" % powerstatus
