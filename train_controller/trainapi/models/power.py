@@ -9,14 +9,6 @@ class Power():
     io.output(power_pin, False)
 
 
-#    def __init__(self, **kwargs):
-#        super(Power, self).__init__(**kwargs)
-#
-#
-#    def __repr__(self):
-#        return "<Power %s>" % self.power_pin
-
-
     def status(self):
         power_status = io.input(power_pin)
-        return "<Power: %s>" % power_status
+        return power_status
