@@ -13,8 +13,7 @@ class PowerStatus(Resource):
     method_decorators = [jwt_required]
 
     def get(self):
-        relay = powerdevice(powerpin)
-        return {"power": relay.value}
+        return {"power": powerdevice.value}
 
 
 class PowerOn(Resource):
@@ -23,8 +22,7 @@ class PowerOn(Resource):
     method_decorators = [jwt_required]
 
     def get(self):
-        relay = powerdevice(powerpin)
-        return {"power": relay.on()}
+        return {"power": powerdevice.on()}
 
 
 class PowerOff(Resource):
@@ -33,5 +31,4 @@ class PowerOff(Resource):
     method_decorators = [jwt_required]
 
     def get(self):
-        relay = powerdevice(powerpin)
-        return {"power": relay.off()}
+        return {"power": powerdevice.off()}
