@@ -6,9 +6,13 @@ class Power():
     powerpin = 24
     io.setmode(io.BCM)
     io.setup(powerpin, io.OUT)
-    io.output(powerpin, False)
-    powerstatus = 0
+    powerstatus = io.input(powerpin)
+
+
+    def __init__(self, **kwargs):
+        super(Power, self).__init__(**kwargs)
+        self.powerstatus = io.input(self.powerpin)
+
 
     def __repr__(self):
-        self.powerstatus = io.input(powerpin)
         return "<Power %s>" % self.powerstatus
