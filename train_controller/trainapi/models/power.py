@@ -1,7 +1,7 @@
 from trainapi.extensions import ma,powerdevice
 
 
-class Power(input):
+class Power():
     """Basic Power Control Module
     """
     def __init__(self, **kwargs):
