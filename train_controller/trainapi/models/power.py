@@ -1,17 +1,12 @@
-from trainapi.extensions import io
+from trainapi.extensions import ma,powerdevice
 
-class Power():
+
+class Power(input):
     """Basic Power Control Module
     """
-    powerpin = 24
-    io.setmode(io.BCM)
-    io.setup(powerpin, io.OUT)
-    powerstatus = io.input(powerpin)
-
-
     def __init__(self, **kwargs):
         super(Power, self).__init__(**kwargs)
-        self.powerstatus = io.input(self.powerpin)
+        self.powerstatus = powerdevice.value
 
 
     def __repr__(self):

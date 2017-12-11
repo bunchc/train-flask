@@ -18,4 +18,3 @@ class PowerControl(Resource):
 
     def put(self, power_status):
         pass
-
