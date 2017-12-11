@@ -1,9 +1,11 @@
 from .user import UserResource, UserList
-from .power import PowerControl
+from .power import PowerStatus, PowerOn, PowerOff
 import RPi.GPIO as io
 
 __all__ = [
     'UserResource',
     'UserList',
-    'PowerControl'
+    'PowerStatus',
+    'PowerOn',
+    'PowerOff',
 ]
