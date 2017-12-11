@@ -2,19 +2,36 @@ from flask import request
 from flask_restful import Resource
 from flask_jwt_extended import jwt_required
 
-from trainapi.models import Power
-from trainapi.extensions import ma, db
+from trainapi.extensions import powerdevice
 from trainapi.commons.pagination import paginate
 
+powerpin = 24
 
-class PowerControl(Resource):
+class PowerStatus(Resource):
     """Single object resource
     """
     method_decorators = [jwt_required]
 
     def get(self):
-        power_status = Power.powerstatus
-        return {"power": power_status}
+        relay = powerdevice(powerpin)
+        return {"power": relay.value}
 
-    def put(self, power_status):
-        pass
+
+class PowerOn(Resource):
+    """Single object resource
+    """
+    method_decorators = [jwt_required]
+
+    def get(self):
+        relay = powerdevice(powerpin)
+        return {"power": relay.on()}
+
+
+class PowerOff(Resource):
+    """Single object resource
+    """
+    method_decorators = [jwt_required]
+
+    def get(self):
+        relay = powerdevice(powerpin)
+        return {"power": relay.off()}
