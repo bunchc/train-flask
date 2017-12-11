@@ -7,40 +7,9 @@ from trainapi.commons.pagination import paginate
 
 powerpin = 24
 
-class PowerStatus(Resource):
-    """Single object resource
-    """
-    method_decorators = [jwt_required]
-
-    def get(self):
-        return {"power": powerdevice.value}
-
-
-class PowerOn(Resource):
-    """Single object resource
-    """
-    method_decorators = [jwt_required]
-
-    def get(self):
-        powerdevice.on()
-        return {"power": powerdevice.value}
-
-
-class PowerOff(Resource):
-    """Single object resource
-    """
-    method_decorators = [jwt_required]
-
-    def get(self):
-        powerdevice.off()
-        return {"power": powerdevice.value}
-
-
 class PowerControl(Resource):
-    """Single object resource
+    """Provides power controls
     """
-    method_decorators = [jwt_required]
-
     def get(self, pwr_ctrl):
         pwr_ctrl = pwr_ctrl.lower()
         if pwr_ctrl == "on":
