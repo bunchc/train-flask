@@ -1,9 +1,13 @@
 from .user import UserResource, UserList
 from .power import PowerControl
-import RPi.GPIO as io
+from .train import TrainStart, TrainStop, TrainSpeed
 
 __all__ = [
     'UserResource',
     'UserList',
     'PowerControl',
+    'TrainControl',
+    'TrainStart',
+    'TrainStop',
+    'TrainSpeed',
 ]
