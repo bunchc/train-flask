@@ -1,2 +1,6 @@
-cookiecutter
-virtualenvwrapper
+pi-plates
+spidev
+RPi.GPIO
+gpiozero
+Flask
+flask_restful
