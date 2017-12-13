@@ -7,7 +7,7 @@ from trainapi.api.resources import (
     PowerControl,
     TrainStart,
     TrainStop,
-    TrainDirection
+    TrainSpeed,
 )
 
 
