@@ -22,7 +22,8 @@ class TrainStart(Resource):
         if not train:
             return jsonify({"msg": "Missing train in request"}), 400
 
-        if motor.dcSTART(motorplate, train, direction, speed, 5):
+        motor.dcCONFIG(motorplate, train, direction, speed, 5)
+        if motor.dcSTART(motorplate, trian):
             return jsonify({"train": train, "status": "Started"})
         else:
             return jsonify({"msg": "Failed to start train"})
@@ -40,7 +41,7 @@ class TrainStop(Resource):
         if not train:
             return jsonify({"msg": "Missing train in request"}), 400
 
-        if motor.dcSTART(motorplate, train):
+        if motor.dcSTOP(motorplate, train):
             return jsonify({"train": train, "status": "Stopped"})
         else:
             return jsonify({"msg": "Failed to Stop train"})
@@ -60,7 +61,7 @@ class TrainSpeed(Resource):
         if not train or not speed:
             return jsonify({"msg": "Missing train in request"}), 400
 
-        if motor.dcSSPEED(motorplate, train, speed):
+        if motor.dcSPEED(motorplate, train, speed):
             return jsonify({"train": train, "Speed": speed})
         else:
             return jsonify({"msg": "Failed to change speed"})
