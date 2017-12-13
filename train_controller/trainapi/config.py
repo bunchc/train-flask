@@ -8,8 +8,10 @@ SECRET_KEY = "changeme"
 SQLALCHEMY_DATABASE_URI = "sqlite:////tmp/trainapi.db"
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-POWER_PIN = 24
+# Pin to control the main relay
+power_pin = 24
 
-MOTOR_PLATE_ADDRESS = 1
-LGB = 3
-KATO = 4
+# Motor-Plate config
+motor_plate_address = 1
+lgb = 3
+kato = 4
