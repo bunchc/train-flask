@@ -7,7 +7,4 @@ __all__ = [
     'UserList',
     'PowerControl',
     'TrainControl',
-    'TrainStart',
-    'TrainStop',
-    'TrainSpeed',
 ]

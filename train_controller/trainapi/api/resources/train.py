@@ -52,7 +52,7 @@ class TrainControl(Resource):
         }
 
         motorplate = cfg.motor_plate_address
-        def post(self, train_ctrl):
+        def post(self):
             if not request.is_json:
                 return jsonify({"msg": "Missing JSON in request"}), 400
 
