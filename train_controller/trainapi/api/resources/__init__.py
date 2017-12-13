@@ -1,6 +1,6 @@
 from .user import UserResource, UserList
 from .power import PowerControl
-from .train import TrainStart, TrainStop, TrainSpeed
+from .train import TrainControl
 
 __all__ = [
     'UserResource',
