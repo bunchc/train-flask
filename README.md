@@ -41,7 +41,7 @@ curl http://train-controller.local:5000/api/v1/power/on
 
 __Power off:__
 ```
-curl http://train-controller.local:5000/api/v1/power/on
+curl http://train-controller.local:5000/api/v1/power/off
 ```
 
 ### Train specific

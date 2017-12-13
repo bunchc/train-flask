@@ -11,7 +11,7 @@ class TrainStart(Resource):
     """Starts a given train with speed and direction values from config.py
     """
     motorplate = cfg.motor_plate_address
-    def post():
+    def post(self, train_ctrl):
         if not request.is_json:
             return jsonify({"msg": "Missing JSON in request"}), 400
 
@@ -32,7 +32,7 @@ class TrainStop(Resource):
     """Stops a given train
     """
     motorplate = cfg.motor_plate_address
-    def post():
+    def post(self, train_ctrl):
         if not request.is_json:
             return jsonify({"msg": "Missing JSON in request"}), 400
 
@@ -51,7 +51,7 @@ class TrainSpeed(Resource):
     """Chnages the speed of a given train
     """
     motorplate = cfg.motor_plate_address
-    def post():
+    def post(self, train_ctrl):
         if not request.is_json:
             return jsonify({"msg": "Missing JSON in request"}), 400
 
