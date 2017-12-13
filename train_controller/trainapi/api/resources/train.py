@@ -2,7 +2,7 @@ from flask import request, jsonify
 from flask_restful import Resource
 from time import sleep
 
-import trainapi.config
+import trainapi.config as cfg
 from trainapi.extensions import motor
 from trainapi.commons.pagination import paginate
 
@@ -10,7 +10,7 @@ from trainapi.commons.pagination import paginate
 class TrainStart(Resource):
     """Starts a given train with speed and direction values from config.py
     """
-    motorplate = motor_plate_address
+    motorplate = cfg.motor_plate_address
     def post():
         if not request.is_json:
             return jsonify({"msg": "Missing JSON in request"}), 400
@@ -30,7 +30,7 @@ class TrainStart(Resource):
 class TrainStop(Resource):
     """Stops a given train
     """
-    motorplate = motor_plate_address
+    motorplate = cfg.motor_plate_address
     def post():
         if not request.is_json:
             return jsonify({"msg": "Missing JSON in request"}), 400
@@ -49,7 +49,7 @@ class TrainStop(Resource):
 class TrainSpeed(Resource):
     """Chnages the speed of a given train
     """
-    motorplate = motor_plate_address
+    motorplate = cfg.motor_plate_address
     def post():
         if not request.is_json:
             return jsonify({"msg": "Missing JSON in request"}), 400

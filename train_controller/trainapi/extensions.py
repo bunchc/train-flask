@@ -9,11 +9,11 @@ from flask_jwt_extended import JWTManager
 from flask_marshmallow import Marshmallow
 from gpiozero import OutputDevice
 from piplates import MOTORplate
-import trainapi.config
+import trainapi.config as cfg
 
 db = SQLAlchemy()
 jwt = JWTManager()
 ma = Marshmallow()
 pwd_context = CryptContext(schemes=['pbkdf2_sha256'], deprecated='auto')
-powerdevice = OutputDevice(power_pin)
+powerdevice = OutputDevice(cfg.power_pin)
 motor = MOTORplate()
