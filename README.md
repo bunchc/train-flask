@@ -90,18 +90,18 @@ Based on the current layout, these values work as follows:
 __Starting a train:__
 
 ```
-curl -X POST -H "Content-Type: application/json" -d '{"train": 3, "direction": "ccw", "speed": 60}' http://train-controller.local:5000/train/start
+curl -X POST -H "Content-Type: application/json" -d '{"train": 3, "direction": "ccw", "speed": 60}' http://train-controller.local:5000/api/v1/train/start
 ```
 
 __Stopping a train:__
 
 ```
-curl -X POST -H "Content-Type: application/json" -d '{"train": 3}' http://train-controller.local:5000/train/stop
+curl -X POST -H "Content-Type: application/json" -d '{"train": 3}' http://train-controller.local:5000/api/v1/train/stop
 ```
 
 __Change the speed of a train:__
 
 ```
-curl -X POST -H "Content-Type: application/json" -d '{"train": 3, "speed": 75}' http://train-controller.local:5000/train/speed
+curl -X POST -H "Content-Type: application/json" -d '{"train": 3, "speed": 75}' http://train-controller.local:5000/api/v1/train/speed
 ```
 
