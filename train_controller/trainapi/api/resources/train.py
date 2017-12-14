@@ -6,6 +6,7 @@ import trainapi.config as cfg
 from trainapi.extensions import motor
 from trainapi.commons.pagination import paginate
 
+motorplate = cfg.motor_plate_address
 
 def startTrain(self, train, direction, speed):
     """Starts a given train
@@ -45,7 +46,6 @@ def trainSpeed(self, train, speed):
 class TrainControl(Resource):
         """Starts a given train with speed and direction values from config.py
         """
-        motorplate = cfg.motor_plate_address
         def get(self):
             return jsonify({"msg": "TrainControl endpoint"})
 
