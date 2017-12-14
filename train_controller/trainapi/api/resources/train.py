@@ -59,9 +59,9 @@ class TrainControl(Resource):
             speed = request.json.get('speed', 50)
 
             actions = {
-                'start': startTrain(train, direction, speed),
-                'stop': stopTrain(train),
-                'speed': trainSpeed(train, speed)
+                'start': startTrain(self, train, direction, speed),
+                'stop': stopTrain(self, train),
+                'speed': trainSpeed(self, train, speed)
             }
 
             return actions.get(action)
