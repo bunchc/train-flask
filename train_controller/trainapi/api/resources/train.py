@@ -7,7 +7,7 @@ from trainapi.extensions import motor
 from trainapi.commons.pagination import paginate
 
 
-def startTrain(self, train, direction, speed)
+def startTrain(self, train, direction, speed):
 """Starts a given train with speed and direction values from config.py
 """
     if not train or not speed or not direction:
