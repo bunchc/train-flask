@@ -45,12 +45,6 @@ def trainSpeed(self, train, speed):
 class TrainControl(Resource):
         """Starts a given train with speed and direction values from config.py
         """
-        actions = {
-            'start': startTrain(train, direction, speed),
-            'stop': stopTrain(train),
-            'speed': trainSpeed(train, speed)
-        }
-
         motorplate = cfg.motor_plate_address
         def get(self):
             return jsonify({"msg": "TrainControl endpoint"})
@@ -63,5 +57,11 @@ class TrainControl(Resource):
             train = request.json.get('train', None)
             direction = request.json.get('direction', 'cw')
             speed = request.json.get('speed', 50)
+
+            actions = {
+                'start': startTrain(train, direction, speed),
+                'stop': stopTrain(train),
+                'speed': trainSpeed(train, speed)
+            }
 
             return actions.get(action)
