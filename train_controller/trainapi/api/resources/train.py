@@ -8,8 +8,8 @@ from trainapi.commons.pagination import paginate
 
 
 def startTrain(self, train, direction, speed):
-"""Starts a given train with speed and direction values from config.py
-"""
+    """Starts a given train
+    """
     if not train or not speed or not direction:
         return jsonify({"msg": "Required parameters missing"}), 400
     motor.dcCONFIG(motorplate, train, direction, speed, 5)
