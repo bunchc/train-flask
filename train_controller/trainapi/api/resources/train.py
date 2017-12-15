@@ -17,8 +17,8 @@ class TrainControl(Resource):
             if not train or not speed or not direction:
                 return jsonify({"msg": "Required parameters missing"}), 400
             motor.dcCONFIG(motorplate, train, direction, speed, 5)
-            if motor.dcSTART(motorplate, trian):
-                return jsonify({"train": train, "status": "Started"})
+            if motor.dcSTART(motorplate, self.trian):
+                return jsonify({"train": self.train, "status": "Started"})
             else:
                 return jsonify({"msg": "Failed to start train"})
 
@@ -60,6 +60,4 @@ class TrainControl(Resource):
                 'stop': self.stopTrain(train),
                 'speed': self.trainSpeed(train, speed)
             }
-
-
             return actions.get(action)
