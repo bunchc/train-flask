@@ -18,29 +18,29 @@ class TrainControl(Resource):
             if not request.is_json:
                 return jsonify({"msg": "Missing JSON in request"}), 400
 
-            action = request.json.get('action', None)
-            train = request.json.get('train', None)
-            direction = request.json.get('direction', 'cw')
-            speed = request.json.get('speed', 50)
+            my_action = request.json.get('action', None)
+            my_train = request.json.get('train', None)
+            my_direction = request.json.get('direction', 'cw')
+            my_speed = request.json.get('speed', 50)
 
-            if action == "start":
-                if not train or not speed or not direction:
+            if my_action == "start":
+                if not my_train or not my_speed or not my_direction:
                     return jsonify({"msg": "Required parameters missing"}), 400
                 else:
-                    motor.dcCONFIG(motorplate, train, direction, speed, 5)
-                    motor.dcSTART(motorplate, trian)
-                    return jsonify({"train": train, "status": "Started"})
-            elif action == "stop":
-                if not train:
+                    motor.dcCONFIG(motorplate, request.json.get('train', None), request.json.get('direction', 'cw'), request.json.get('speed', 50), 5)
+                    motor.dcSTART(motorplate, my_train)
+                    return jsonify({"train": my_train, "status": "Started"})
+            elif my_action == "stop":
+                if not my_train:
                     return jsonify({"msg": "Missing train in request"}), 400
                 else:
-                    motor.dcSTOP(motorplate, train)
-                    return jsonify({"train": train, "status": "Stopped"})
-            elif action == "speed":
-                if not train or not speed:
+                    motor.dcSTOP(motorplate, my_train)
+                    return jsonify({"train": my_train, "status": "Stopped"})
+            elif my_action == "speed":
+                if not my_train or not my_speed:
                     return jsonify({"msg": "Required parameters missing"}), 400
                 else:
-                    motor.dcSPEED(motorplate, train, speed)
-                    return jsonify({"train": train, "Speed": speed})
+                    motor.dcSPEED(motorplate, my_train, my_speed)
+                    return jsonify({"train": my_train, "Speed": my_speed})
             else:
-                return jsonify({"msg": "Invalid action specified", "Action": action})
+                return jsonify({"msg": "Invalid action specified", "Action": my_action})
