@@ -1,14 +1,31 @@
 # train-flask
 
-Overengineering Christmas train display FTW!
+Over engineering Christmas train display FTW!
+
+## Overview
+
+This is a flask-restful app that currently controls:
+
+* Power to the entire Christmas display (via a relay)
+* Power and speed control for DC Trains
+    - N-Scale Kato GS-4 BNSF Black
+    - G-Scale LGB "Stainz" (or some variant)
 
 ## Parts
 
-TODO
+There are a few components to this build. I've listed only the electronics parts here. You should be able to swap in about any trains (up to 4 with this hardware), as long as you stay under 1.5 Watts @ 15 Volts.
 
-## Architecture
+* Raspberry Pi 2 Model B v1.1
+    - and the bits to make it work
+* [Pi-Plates Motor Plate](http://pi-plates.com/motorr1/)
+* 12v 2a power supply
+* Some 2 conductor 16-awg copper jumper wire
 
-TODO
+## Building
+
+```
+docker build -t train-flask .
+```
 
 ## Starting the train API
 
@@ -23,7 +40,10 @@ docker run \
 
 ## Operating
 
-The following commands show how to operate various bits of the christmas display
+Currently, the display is broken into two components:
+
+1. Power for the display
+2. Train operations
 
 ### Entire display
 
@@ -60,8 +80,8 @@ __Train:__
 
 The train ID is a numerical value between 1 and 4 that corresponds to the DC motor control on the MOTORplate. These are currently:
 
-* LGB:      4
-* KATO:     3
+* LGB:      3
+* KATO:     4
 
 __Speed:__
 
@@ -90,18 +110,18 @@ Based on the current layout, these values work as follows:
 __Starting a train:__
 
 ```
-curl -X POST -H "Content-Type: application/json" -d '{"train": 3, "direction": "ccw", "speed": 60}' http://train-controller.local:5000/api/v1/train/start
+curl -v -X POST -H "Content-Type: application/json" -d '{"action": "start", "train": 4, "direction": "cw", "speed": 60}' http://train-controller.local:5000/api/v1/train
 ```
 
 __Stopping a train:__
 
 ```
-curl -X POST -H "Content-Type: application/json" -d '{"train": 3}' http://train-controller.local:5000/api/v1/train/stop
+curl -v -X POST -H "Content-Type: application/json" -d '{"action": "stop", "train": 4}' http://train-controller.local:5000/api/v1/train
 ```
 
 __Change the speed of a train:__
 
 ```
-curl -X POST -H "Content-Type: application/json" -d '{"train": 3, "speed": 75}' http://train-controller.local:5000/api/v1/train/speed
+curl -v -X POST -H "Content-Type: application/json" -d '{"action": "speed", "train": 4, "speed": 80}' http://train-controller.local:5000/api/v1/train
 ```
 
