@@ -1,6 +1,7 @@
-pi-plates
 spidev
 RPi.GPIO
-gpiozero
+adafruit-circuitpython-motorkit
+adafruit-blinka
+Adafruit_MotorHAT
 Flask
 flask_restful
