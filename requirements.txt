@@ -1,4 +1,5 @@
 spidev
+gpiozero
 RPi.GPIO
 adafruit-circuitpython-motorkit
 adafruit-blinka

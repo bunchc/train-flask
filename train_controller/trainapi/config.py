@@ -9,9 +9,10 @@ SQLALCHEMY_DATABASE_URI = "sqlite:////tmp/trainapi.db"
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 # Pin to control the main relay
-power_pin = 24
+power_pin = 16
 
 # Motor-Plate config
-motor_plate_address = 1
+motor_hat_address = "0x60"
+kato_inside_track = 1
+kato_outside_track = 2
 lgb = 3
-kato = 4
