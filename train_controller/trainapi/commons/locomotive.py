@@ -89,7 +89,7 @@ def stopTrain(locomotive_id):
     """
 
     currentStatus = trainStatus(locomotive_id)
-    if (currentStatus['status'] == 'off'):
+    if (currentStatus['status'] == 'stopped'):
         raise Exception('Locomotive is already off.')
     try:
         stopped = decelerate(locomotive_id, 0)
@@ -141,7 +141,7 @@ def decelerate(locomotive_id, speed):
         raise Exception('Train is currently stopped. Please use startTrain')
     else:
         try:
-            for i in range(currentSpeed, speed+1):
+            for i in reversed(range(speed, currentSpeed)):
                 motor.throttle = i/10
                 time.sleep(0.1)
             return trainStatus(locomotive_id)
