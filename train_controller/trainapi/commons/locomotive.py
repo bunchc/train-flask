@@ -157,16 +157,19 @@ def trainStatus(locomotive_id):
     powerStatus = 'on'
     if (motor.throttle == 0 or motor.throttle == None):
         powerStatus = 'off'
+        trainSpeed = 0
         direction = 'stopped'
     elif (motor.throttle > 0):
         direction = 'forward'
+        trainSpeed = motor.throttle
     elif (motor.throttle < 0):
+        trainSpeed = motor.throttle
         direction = 'backward'    
 
     train = {
         'id': locomotive_id,
         'status': powerStatus,
         'direction': direction,
-        'speed': motor.throttle
+        'speed': trainSpeed
     }
     return train
