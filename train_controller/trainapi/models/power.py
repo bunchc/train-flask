@@ -16,7 +16,7 @@ class PowerModel(swagger.Schema):
     type = 'object'
     properties = {
         'status': {
-            'type': 'string'
+            'type': 'boolean'
         }
     }
     required = ['powerPin']

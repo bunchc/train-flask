@@ -27,7 +27,7 @@ class PowerStatus(Resource):
                 'name': 'status',
                 'description': 'Returns the current power state of the display',
                 'in': 'path',
-                'type': 'string'
+                'type': 'boolean'
             }
         ],
         'responses': {
