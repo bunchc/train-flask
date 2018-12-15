@@ -155,7 +155,7 @@ def trainStatus(locomotive_id):
 
     motor = getattr(mh, "motor{}".format(locomotive_id))
     powerStatus = 'on'
-    if (motor.throttle == 0):
+    if (motor.throttle == 0 or motor.throttle == None):
         powerStatus = 'off'
         direction = 'stopped'
     elif (motor.throttle > 0):
