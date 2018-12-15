@@ -19,4 +19,4 @@ class PowerModel(swagger.Schema):
             'type': 'boolean'
         }
     }
-    required = ['powerPin']
+    required = ['status']
