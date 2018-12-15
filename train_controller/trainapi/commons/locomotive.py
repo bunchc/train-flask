@@ -162,9 +162,9 @@ def trainStatus(locomotive_id):
         direction = 'stopped'
     elif (motor.throttle > 0):
         direction = 'forward'
-        trainSpeed = motor.throttle
+        trainSpeed = motor.throttle*10
     elif (motor.throttle < 0):
-        trainSpeed = motor.throttle
+        trainSpeed = motor.throttle*10
         direction = 'backward'    
 
     train = {
