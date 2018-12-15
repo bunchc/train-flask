@@ -1,8 +1,51 @@
-from trainapi.extensions import ma
+"""
+    trainapi.models.train
+    ~~~~~~~~~~~~~~
 
+    Datamodel for train control
 
-class Train():
-    """Basic Train Control Module
+    :license: BSD, see LICENSE for more details.
+
+"""
+
+from trainapi.extensions import ma, swagger, pwd_context
+
+class TrainModel(swagger.Schema):
+    """Model containing all current information about a locomotive
     """
-    def __init__(self, **kwargs):
-        super(Train, self).__init__(**kwargs)
+    type = 'object'
+    properties = {
+        'id': {
+            'type': 'integer',
+            'format': 'int64'
+        },
+        'status': {
+            'type': 'string'
+        },
+        'direction': {
+            'type': 'string'
+        },
+        'speed': {
+            'type': 'integer',
+            'format': 'int64'
+        }
+    }
+    required = ['id']
+
+class TrainError(swagger.Schema):
+    """Model for reporting locomotive control errors
+    """
+    type = 'object'
+    properties = {
+        'errorID': {
+            'type': 'integer',
+            'format': 'int64'
+        },
+        'name': {
+            'type': 'string'
+        },
+        'description': {
+            'type': 'string'
+        }
+    }
+    required = ['errorId']

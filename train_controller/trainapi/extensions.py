@@ -8,8 +8,8 @@ from passlib.context import CryptContext
 from flask_jwt_extended import JWTManager
 from flask_marshmallow import Marshmallow
 from gpiozero import OutputDevice
-from  Adafruit_MotorHAT import Adafruit_MotorHAT
-from  Adafruit_MotorHAT import Adafruit_DCMotor
+from adafruit_motorkit import MotorKit
+import flask_restful_swagger_2 as swagger
 
 import trainapi.config as cfg
 
@@ -18,5 +18,4 @@ jwt = JWTManager()
 ma = Marshmallow()
 pwd_context = CryptContext(schemes=['pbkdf2_sha256'], deprecated='auto')
 powerdevice = OutputDevice(cfg.power_pin)
-mh = Adafruit_MotorHAT(cfg.motor_hat_address)
-
+mh = MotorKit()

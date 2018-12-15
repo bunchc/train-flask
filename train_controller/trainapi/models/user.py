@@ -1,3 +1,15 @@
+# -*- coding: utf-8 -*-
+
+"""
+    trainapi.models.user
+    ~~~~~~~~~~~~~~
+
+    Basic user model
+
+    :license: BSD, see LICENSE for more details.
+
+"""
+
 from trainapi.extensions import db, pwd_context
 
 

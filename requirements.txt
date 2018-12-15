@@ -5,4 +5,5 @@ adafruit-circuitpython-motorkit
 adafruit-blinka
 Adafruit_MotorHAT
 Flask
-flask_restful
+flask-restful
+flask-restful-swagger-2
