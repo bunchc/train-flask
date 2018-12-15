@@ -43,10 +43,9 @@ class PowerStatus(Resource):
         }
     })
     def get(self):
-        if (powerdevice.value == True):
-            status = 'on'
-        else:
-            status = 'off'
+        status = {
+            'status': powerdevice.value
+        }
         
         return PowerModel(**status), 200
 
@@ -84,9 +83,14 @@ class PowerControl(Resource):
         }
     })
     def post(self, status):
-        status = status.lower()
-        if ((status == 'on' and powerdevice == True) or (status == 'off' and powerdevice == False)):
+        if ((status == True and powerdevice == True) or (status == False and powerdevice == False)):
+            status = {
+                'status': powerdevice.value
+            }
             return PowerModel(**status), 400
         else:
             powerdevice.value = status
+            status = {
+                'status': powerdevice.value
+            }
             return PowerModel(**status), 200
