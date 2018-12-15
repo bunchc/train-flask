@@ -1,9 +1,10 @@
 from .user import User
-from .power import Power
-from .train import Train, TrainModel, TrainError
+from .power import PowerModel
+from .train import TrainModel, TrainError
 
 __all__ = [
     'User',
-    'Power'
-    'Train'
+    'PowerModel',
+    'TrainModel',
+    'TrainError'
 ]

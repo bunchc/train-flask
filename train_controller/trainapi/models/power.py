@@ -8,7 +8,7 @@
 
 """
 
-from trainapi.extensions import ma, swagger, powerdevice
+from trainapi.extensions import swagger
 
 class PowerModel(swagger.Schema):
     """Basic Power Control Module
@@ -20,11 +20,3 @@ class PowerModel(swagger.Schema):
         }
     }
     required = ['powerPin']
-    
-    def __init__(self, **kwargs):
-        super(Power, self).__init__(**kwargs)
-        self.powerstatus = powerdevice.value
-
-
-    def __repr__(self):
-        return "<Power %s>" % self.powerstatus

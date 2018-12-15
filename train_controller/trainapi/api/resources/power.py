@@ -21,11 +21,11 @@ import trainapi.commons.exceptions as e
 class PowerStatus(Resource):
     @swagger.doc({
         'tags': ['power'],
-        'description': 'Return the current power state of the display.'
+        'description': 'Return the current power state of the display',
         'parameters': [
             {
                 'name': 'status',
-                'description': 'Returns the current power state of the display'
+                'description': 'Returns the current power state of the display',
                 'in': 'path',
                 'type': 'string'
             }
@@ -53,11 +53,11 @@ class PowerStatus(Resource):
 class PowerControl(Resource):
     @swagger.doc({
         'tags': ['power'],
-        'description': 'Turn the display on or off'
+        'description': 'Turn the display on or off',
         'parameters': [
             {
                 'name': 'status',
-                'description': 'Defines if the display should be on or off'
+                'description': 'Defines if the display should be on or off',
                 'in': 'path',
                 'type': 'boolean'
             }
@@ -73,11 +73,12 @@ class PowerControl(Resource):
                 }
             },
             '400': {
-                'description': 'Invalid powerstate requested'
+                'description': 'Invalid powerstate requested',
                 'schema': PowerModel,
                 'examples': {
                     'application/json': {
                         'status': False
+                    }
                 }
             }
         }

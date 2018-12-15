@@ -8,7 +8,7 @@
 
 """
 
-from trainapi.extensions import ma, swagger, pwd_context
+from trainapi.extensions import swagger
 
 class TrainModel(swagger.Schema):
     """Model containing all current information about a locomotive
