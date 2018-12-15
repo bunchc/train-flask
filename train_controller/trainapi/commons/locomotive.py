@@ -2,7 +2,7 @@
 
 """
     trainapi.commons.locomotive
-    ~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     Wrapper logic around the Adafruit MotorHAT
 

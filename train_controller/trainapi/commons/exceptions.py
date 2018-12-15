@@ -2,7 +2,7 @@
 
 """
     trainapi.commons.exceptions
-    ~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     Wrapper logic around the Adafruit MotorHAT
 

@@ -2,7 +2,7 @@
 
 """
     trainapi.api.train
-    ~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~
 
     API functions to control DC Locomotives via the Adafruit MotorHAT
 
@@ -107,11 +107,6 @@ class TrainControl(Resource):
             }
         }
     })
-
-    def get(self, locomotive_id):
-        train = display.trainStatus(locomotive_id)
-        return TrainModel(**train), 200
-
     def post(self):
         if not request.is_json:
             return TrainError(**e.error[3]), e.error[3]['response']
