@@ -143,8 +143,6 @@ def decelerate(locomotive_id, speed):
         raise Exception('Specified speed invalid. Speed values must be between 0 and 10')
     elif (currentSpeed < speed):
         raise Exception('Requested speed is higher than the current speed. Try accelerate instead.')
-    elif (currentSpeed == 0):
-        raise Exception('Train is currently stopped. Please use startTrain')
     else:
         try:
             for i in reversed(range(speed, currentSpeed)):
