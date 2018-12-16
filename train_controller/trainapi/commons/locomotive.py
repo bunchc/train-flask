@@ -134,6 +134,9 @@ def decelerate(locomotive_id, speed):
     """
 
     motor = getattr(mh, "motor{}".format(locomotive_id))
+    if (motor.throttle == None):
+        motor.throttle = 0
+    
     currentSpeed = int(motor.throttle*10)
     if (speed > 10 or speed < -10):
         raise Exception('Specified speed invalid. Speed values must be between 0 and 10')
