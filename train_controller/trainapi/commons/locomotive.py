@@ -112,7 +112,7 @@ def accelerate(locomotive_id, speed):
     currentSpeed = int(motor.throttle*10)
     if (speed > 10 or speed < -10):
         raise Exception('Specified speed invalid. Speed values must be between 0 and 10')
-    elif (currentSpeed > speed):
+    elif (abs(currentSpeed) > abs(speed):
         raise Exception('Requested speed is lower than the current speed. Try decelerate instead.')
     else: 
         try:
@@ -135,7 +135,7 @@ def decelerate(locomotive_id, speed):
     currentSpeed = int(motor.throttle*10)
     if (speed > 10 or speed < -10):
         raise Exception('Specified speed invalid. Speed values must be between 0 and 10')
-    elif (currentSpeed < speed):
+    elif (abs(currentSpeed) < abs(speed)):
         raise Exception('Requested speed is higher than the current speed. Try accelerate instead.')
     elif (currentSpeed == 0):
         raise Exception('Train is currently stopped. Please use startTrain')
