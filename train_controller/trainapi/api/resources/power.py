@@ -84,13 +84,17 @@ class PowerControl(Resource):
     })
     def post(self):
         powerStatus = request.json.get('status', None)
-        if ((powerStatus == True and powerdevice == True) or (powerStatus == False and powerdevice == False)):
+        if ((powerStatus == "on" and powerdevice.value == True) or (powerStatus == "off" and powerdevice.value == False)):
             status = {
                 'status': powerdevice.value
             }
             return PowerModel(**status), 400
         else:
-            powerdevice.value = powerStatus
+            if (powerStatus == "on"):
+                powerdevice.on()
+            else:
+                powerdevice.off()
+            
             status = {
                 'status': powerdevice.value
             }
