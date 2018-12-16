@@ -70,16 +70,16 @@ def startTrain(locomotive_id, direction, speed):
 
        :param int speed: Defines how fast the train should go between 0 and 10
     """
-    stride = 1
+    
     currentStatus = trainStatus(locomotive_id)
     if (currentStatus['status'] == 'on'):
         raise Exception('Locomotive is already on.')
     else:
         try:
             if (direction == "backward"):
-                stride = -1
-
-            started = accelerate(locomotive_id, speed)
+                started = decelerate(locomotive_id, speed)
+            else:
+                started = accelerate(locomotive_id, speed)
             return started
         except Exception as error:
             raise Exception(error)
