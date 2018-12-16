@@ -77,6 +77,7 @@ def startTrain(locomotive_id, direction, speed):
     else:
         try:
             if (direction == "backward"):
+                speed = -speed
                 started = decelerate(locomotive_id, speed)
             else:
                 started = accelerate(locomotive_id, speed)
