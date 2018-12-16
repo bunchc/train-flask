@@ -12,6 +12,8 @@
 from trainapi.extensions import mh
 import time
 
+stride = 1
+
 def haltTrains():
     """Halts all trains. Throttle is set to 0 with no deceleration. This may cause cars to become derailed.
        It is better to use stopAllTrains().
@@ -68,14 +70,14 @@ def startTrain(locomotive_id, direction, speed):
 
        :param int speed: Defines how fast the train should go between 0 and 10
     """
-
+    stride = 1
     currentStatus = trainStatus(locomotive_id)
     if (currentStatus['status'] == 'on'):
         raise Exception('Locomotive is already on.')
     else:
         try:
             if (direction == "backward"):
-                speed = -speed
+                stride = -1
 
             started = accelerate(locomotive_id, speed)
             return started
