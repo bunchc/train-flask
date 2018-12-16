@@ -26,8 +26,7 @@ class TrainModel(swagger.Schema):
             'type': 'string'
         },
         'speed': {
-            'type': 'integer',
-            'format': 'int64'
+            'type': 'float'
         }
     }
     required = ['id']
