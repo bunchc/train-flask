@@ -121,7 +121,7 @@ def accelerate(locomotive_id, speed):
         try:
             for i in range(currentSpeed, speed+1):
                 motor.throttle = i/10
-                time.sleep(0.4)
+                time.sleep(0.2)
             return trainStatus(locomotive_id)
         except:
             raise
@@ -147,7 +147,7 @@ def decelerate(locomotive_id, speed):
         try:
             for i in reversed(range(speed, currentSpeed)):
                 motor.throttle = i/10
-                time.sleep(0.4)
+                time.sleep(0.2)
             return trainStatus(locomotive_id)
         except:
             raise
