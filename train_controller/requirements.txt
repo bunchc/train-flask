@@ -8,3 +8,4 @@ flask-jwt-extended
 marshmallow-sqlalchemy
 passlib
 tox
+factory-boy
