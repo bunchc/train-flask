@@ -2,6 +2,8 @@
 
 Use env var to override
 """
+
+FLASK_ENV = development
 DEBUG = True
 SECRET_KEY = "changeme"
 
