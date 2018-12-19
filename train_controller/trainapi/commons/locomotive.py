@@ -160,7 +160,7 @@ def trainStatus(locomotive_id):
        :param int locomotive_id: Specifies which locomotive: between 1 and 4
     """
 
-    loco_board = [train['address'] for train in cfg.trains if train['locomotive_id'] == locomotive_id][0]
+    loco_board = [train['address'] for train in cfg.trains if train['id'] == locomotive_id][0]
     motor = getattr(mh[loco_board], "motor{}".format(locomotive_id))
     powerStatus = 'on'
     if (motor.throttle == 0 or motor.throttle == None):
