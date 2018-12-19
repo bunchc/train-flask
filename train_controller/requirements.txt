@@ -5,7 +5,12 @@ flask-migrate
 flask-sqlalchemy
 flask-marshmallow
 flask-jwt-extended
+spidev
+gpiozero
+RPi.GPIO
+adafruit-circuitpython-motorkit
+adafruit-blinka
+Adafruit_MotorHAT
 marshmallow-sqlalchemy
 passlib
 tox
-factory-boy
