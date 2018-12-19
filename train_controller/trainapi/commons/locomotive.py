@@ -109,7 +109,7 @@ def accelerate(locomotive_id, speed):
        :param int speed: Defines how fast the train should go between 0 and 10
     """
     
-    loco_board = [train['address'] for train in cfg.trains if train['id]'] == locomotive_id][0]
+    loco_board = [train['address'] for train in cfg.trains if train['id'] == locomotive_id][0]
     motor = getattr(mh[loco_board], "motor{}".format(locomotive_id))
     if (motor.throttle == None):
         motor.throttle = 0
