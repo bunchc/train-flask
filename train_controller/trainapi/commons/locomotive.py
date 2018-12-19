@@ -9,6 +9,7 @@
     :license: BSD, see LICENSE for more details.
 """
 
+import trainapi.config as cfg
 from trainapi.extensions import mh
 import time
 
@@ -19,12 +20,12 @@ def haltTrains():
        It is better to use stopAllTrains().
     """
 
+    loco_board = [train['address'] for train in cfg.trains if train['id]'] == locomotive_id][0]
     trains = []
-    for i in range(1,5):
+    for train_id, address in {train['id']: train['address'] for train in cfg.trains}:
         try:
-            motor = getattr(mh, "motor{}".format(i))
-            motor.throttle = 0
-            trains.append(trainStatus(i))
+            motor = getattr(mh[address], "motor{}".format(train_id)).throttle = 0
+            trains.append(trainStatus(train_id))
         except:
             raise
     
@@ -35,9 +36,9 @@ def stopAllTrains():
     """
 
     trains = []
-    for i in range(1,5):
+    for train_id in {train['id'] for train in cfg.trains}:
         try:
-            trains.append(stopTrain(i))
+            trains.append(stopTrain(train_id))
         except Exception as error:
             raise Exception(error)
         
@@ -52,9 +53,9 @@ def startAllTrains(direction, speed):
     """
     
     trains = []
-    for i in range(1,5):
+    for train_id in {train['id'] for train in cfg.trains}:
         try:
-            trains.append(startTrain(i, direction, speed))
+            trains.append(startTrain(train_id, direction, speed))
             time.sleep(5)
         except Exception as error:
             raise Exception(error)
@@ -108,7 +109,8 @@ def accelerate(locomotive_id, speed):
        :param int speed: Defines how fast the train should go between 0 and 10
     """
     
-    motor = getattr(mh, "motor{}".format(locomotive_id))
+    loco_board = [train['address'] for train in cfg.trains if train['id]'] == locomotive_id][0]
+    motor = getattr(mh[loco_board], "motor{}".format(locomotive_id))
     if (motor.throttle == None):
         motor.throttle = 0
     
@@ -133,8 +135,8 @@ def decelerate(locomotive_id, speed):
 
        :param int speed: Defines how fast the train should go between 0 and 10
     """
-
-    motor = getattr(mh, "motor{}".format(locomotive_id))
+    loco_board = [train['address'] for train in cfg.trains if train['id'] == locomotive_id][0]
+    motor = getattr(mh[loco_board], "motor{}".format(locomotive_id))
     if (motor.throttle == None):
         motor.throttle = 0
     
@@ -158,7 +160,8 @@ def trainStatus(locomotive_id):
        :param int locomotive_id: Specifies which locomotive: between 1 and 4
     """
 
-    motor = getattr(mh, "motor{}".format(locomotive_id))
+    loco_board = [train['address'] for train in cfg.trains if train['id'] == locomotive_id][0]
+    motor = getattr(mh[loco_board], "motor{}".format(locomotive_id))
     powerStatus = 'on'
     if (motor.throttle == 0 or motor.throttle == None):
         powerStatus = 'off'

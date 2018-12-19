@@ -18,4 +18,4 @@ jwt = JWTManager()
 ma = Marshmallow()
 pwd_context = CryptContext(schemes=['pbkdf2_sha256'], deprecated='auto')
 powerdevice = OutputDevice(cfg.power_pin)
-mh = MotorKit()
+mh = {addr: MotorKit(address=addr) for addr in list(set([ train['address'] for train in cfg.trains ]))}
