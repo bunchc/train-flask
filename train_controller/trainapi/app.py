@@ -4,7 +4,7 @@ from trainapi import auth, api
 from trainapi.extensions import db, jwt
 
 
-def create_app(config=None, testing=False):
+def create_app(config=None, testing=True):
     """Application factory, used to create application
     """
     app = Flask('trainapi')
@@ -16,7 +16,7 @@ def create_app(config=None, testing=False):
     return app
 
 
-def configure_app(app, testing=False):
+def configure_app(app, testing=True):
     """set configuration for application
     """
     # default configuration
