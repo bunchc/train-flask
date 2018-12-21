@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 
 """
-    trainapi.commons.locomotive
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    trainapi.drivers.motorhat.locomotive
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    Wrapper logic around the Adafruit MotorHAT
+    TrainAPI Driver for the Adafruit MotorHAT
+
+    Provides throttle and direction control for DC locomotives
+    by controlling track voltage.
 
     :license: BSD, see LICENSE for more details.
 """
@@ -13,8 +16,6 @@ import trainapi.config as cfg
 from trainapi.extensions import mh
 import time
 
-stride = 1
-
 def haltTrains():
     """Halts all trains. Throttle is set to 0 with no deceleration. This may cause cars to become derailed.
        It is better to use stopAllTrains().
@@ -22,7 +23,7 @@ def haltTrains():
 
     train_status = []
     for train_id in {train['id'] for train in cfg.trains}:
-        loco_board = [train['address'] for train in cfg.trains if train['id'] == train_id][0]
+        loco_board = [train['driver_config']['address'] for train in cfg.trains if train['id'] == train_id][0]
         try:
             motor = getattr(mh[loco_board], "motor{}".format(train_id)).throttle = 0
             train_status.append(trainStatus(train_id))
@@ -111,7 +112,7 @@ def accelerate(locomotive_id, speed):
        :param int speed: Defines how fast the train should go between 0 and 10
     """
     
-    loco_board = [train['address'] for train in cfg.trains if train['id'] == locomotive_id][0]
+    loco_board = [train['driver_config']['address'] for train in cfg.trains if train['id'] == locomotive_id][0]
     motor = getattr(mh[loco_board], "motor{}".format(locomotive_id))
     if (motor.throttle == None):
         motor.throttle = 0
@@ -137,7 +138,7 @@ def decelerate(locomotive_id, speed):
 
        :param int speed: Defines how fast the train should go between 0 and 10
     """
-    loco_board = [train['address'] for train in cfg.trains if train['id'] == locomotive_id][0]
+    loco_board = [train['driver_config']['address'] for train in cfg.trains if train['id'] == locomotive_id][0]
     motor = getattr(mh[loco_board], "motor{}".format(locomotive_id))
     if (motor.throttle == None):
         motor.throttle = 0
@@ -162,7 +163,7 @@ def trainStatus(locomotive_id):
        :param int locomotive_id: Specifies which locomotive to lookup.
     """
 
-    loco_board = [train['address'] for train in cfg.trains if train['id'] == locomotive_id][0]
+    loco_board = [train['driver_config']['address'] for train in cfg.trains if train['id'] == locomotive_id][0]
     motor = getattr(mh[loco_board], "motor{}".format(locomotive_id))
     powerStatus = 'on'
     if (motor.throttle == 0 or motor.throttle == None):
@@ -195,4 +196,3 @@ def getTrain(locomotive_id = 'all'):
         return train
     else:
         return cfg.trains
-

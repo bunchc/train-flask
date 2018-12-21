@@ -10,7 +10,7 @@ Use env var to override
 # The example config below is basic. See the README for a
 # specific driver for recommendations and advanced features.
 
-driver = [
+drivers = [
     {
         # Driver for the Adafruit MotorHAT
         # Provides basic control of DC trains
