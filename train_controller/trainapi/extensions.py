@@ -7,11 +7,13 @@ from flask_sqlalchemy import SQLAlchemy
 from passlib.context import CryptContext
 from flask_jwt_extended import JWTManager
 from flask_marshmallow import Marshmallow
+import trainapi.config as cfg
+
 from gpiozero import OutputDevice
 from adafruit_motorkit import MotorKit
 import flask_restful_swagger_2 as swagger
 
-import trainapi.config as cfg
+
 
 db = SQLAlchemy()
 jwt = JWTManager()
