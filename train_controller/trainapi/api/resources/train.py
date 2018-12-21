@@ -51,6 +51,39 @@ class TrainStatus(Resource):
         train = display.trainStatus(locomotive_id)
         return TrainModel(**train), 200
 
+class TrainInfo(Resource):
+    @swagger.doc({
+        'tags': ['info'],
+        'description': 'Returns information about locomotives',
+        'parameters': [
+            {
+                'name': 'locomotive_id',
+                'description': 'Specifies a locomotive to look up. Defaults to all.',
+                'in': 'path',
+                'type': 'integer'
+            }
+        ],
+        'responses': {
+            '200': {
+                'description': 'Locomotive Status',
+                'schema': TrainModel,
+                'examples': {
+                    'application/json': {
+                        'id': 1,
+                        'name': 'Silver Streak Zephyr',
+                        'locomotive': 'EMD E5A',
+                        'manufacturer': 'Kato',
+                        'throttle_max': 0.4,
+                        'address': 0x60
+                    }
+                }
+            }
+        }
+    })
+    def get(self, locomotive_id = 'all'):
+        train = display.getTrain(locomotive_id)
+        return list(TrainModel(**train), 200)
+
 class TrainControl(Resource):
     @swagger.doc({
         'tags': ['locomotive', 'control'],
@@ -120,16 +153,16 @@ class TrainControl(Resource):
             return TrainError(**e.error[5]), e.error[5]['response']
         elif action == "haltTrains":
             trains = display.haltTrains()
-            return map(lambda train: TrainModel(**train), trains), 200
+            return list(map(lambda train: TrainModel(**train), trains)), 200
         elif action == "stopAllTrains":
             trains = display.stopAllTrains()
-            return map(lambda train: TrainModel(**train), trains), 200
+            return list(map(lambda train: TrainModel(**train), trains)), 200
         elif action == "startAllTrains":
             if not speed or not direction:
                 return TrainError(**e.error[6]), e.error[6]['response']
             else:
                 trains = display.startAllTrains(direction, speed)
-            return map(lambda train: TrainModel(**train), trains), 200
+            return list(map(lambda train: TrainModel(**train), trains)), 200
         else:
             if (not locomotive_id):
                 return TrainError(**e.error[4]), e.error[4]['response']

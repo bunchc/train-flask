@@ -20,29 +20,30 @@ def haltTrains():
        It is better to use stopAllTrains().
     """
 
-    loco_board = [train['address'] for train in cfg.trains if train['id]'] == locomotive_id][0]
-    trains = []
-    for train_id, address in {train['id']: train['address'] for train in cfg.trains}:
+    train_status = []
+    for train_id in {train['id'] for train in cfg.trains}:
+        loco_board = [train['address'] for train in cfg.trains if train['id'] == train_id][0]
         try:
-            motor = getattr(mh[address], "motor{}".format(train_id)).throttle = 0
-            trains.append(trainStatus(train_id))
+            motor = getattr(mh[loco_board], "motor{}".format(train_id)).throttle = 0
+            train_status.append(trainStatus(train_id))
         except:
             raise
     
-    return trains
+    return train_status
 
 def stopAllTrains():
     """Attempts to gradually slow all trains to a stop.
     """
 
-    trains = []
+    train_status = []
     for train_id in {train['id'] for train in cfg.trains}:
         try:
-            trains.append(stopTrain(train_id))
+            stopTrain(train_id)
+            train_status.append(trainStatus(train_id))
         except Exception as error:
             raise Exception(error)
-        
-        return trains
+
+    return train_status
 
 def startAllTrains(direction, speed):
     """Attempts to bring each locomotive up to speed, one at a time with a 5 second pause between trains.
@@ -52,20 +53,21 @@ def startAllTrains(direction, speed):
        :param int speed: Defines how fast the train should go between 0 and 10
     """
     
-    trains = []
+    train_status = []
     for train_id in {train['id'] for train in cfg.trains}:
         try:
-            trains.append(startTrain(train_id, direction, speed))
+            startTrain(train_id, direction, speed)
+            train_status.append(trainStatus(train_id))
             time.sleep(5)
         except Exception as error:
             raise Exception(error)
         
-        return trains
+    return train_status
 
 def startTrain(locomotive_id, direction, speed):
     """Starts locomotive ``locomotive_id`` and brings it up to speed ``speed``
 
-       :param int locomotive_id: Specifies which locomotive: between 1 and 4
+       :param int locomotive_id: Specifies which locomotive
 
        :param string direction: Specifies train direction: forward or backward
 
@@ -89,7 +91,7 @@ def startTrain(locomotive_id, direction, speed):
 def stopTrain(locomotive_id):
     """Stops locomotive ``locomotive_id``.
     
-       :param int locomotive_id: Specifies which locomotive: between 1 and 4
+       :param int locomotive_id: Specifies which locomotive
     """
 
     currentStatus = trainStatus(locomotive_id)
@@ -104,7 +106,7 @@ def stopTrain(locomotive_id):
 def accelerate(locomotive_id, speed):
     """Accelerates locomotive ``locomotive_id`` to ``speed``
     
-       :param int locomotive_id: Specifies which locomotive: between 1 and 4
+       :param int locomotive_id: Specifies which locomotive
 
        :param int speed: Defines how fast the train should go between 0 and 10
     """
@@ -131,7 +133,7 @@ def accelerate(locomotive_id, speed):
 def decelerate(locomotive_id, speed):
     """Decelerates locomotive ``locomotive_id`` to ``speed``.
     
-       :param int locomotive_id: Specifies which locomotive: between 1 and 4
+       :param int locomotive_id: Specifies which locomotive
 
        :param int speed: Defines how fast the train should go between 0 and 10
     """
@@ -157,7 +159,7 @@ def decelerate(locomotive_id, speed):
 def trainStatus(locomotive_id):
     """Queries the status of a given locomotive
     
-       :param int locomotive_id: Specifies which locomotive: between 1 and 4
+       :param int locomotive_id: Specifies which locomotive to lookup.
     """
 
     loco_board = [train['address'] for train in cfg.trains if train['id'] == locomotive_id][0]
@@ -181,3 +183,16 @@ def trainStatus(locomotive_id):
         'speed': trainSpeed
     }
     return train
+
+def getTrain(locomotive_id = 'all'):
+    """Returns all info for ```locomotive_id``` found in the config
+
+       :param in locomotive_id: Specifies which locomotive to lookup.
+    """
+
+    if (not locomotive_id == 'all'):
+        train = [train for train in cfg.trains if train['id'] == locomotive_id]
+        return train
+    else:
+        return cfg.trains
+

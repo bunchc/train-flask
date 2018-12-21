@@ -19,6 +19,22 @@ class TrainModel(swagger.Schema):
             'type': 'integer',
             'format': 'int64'
         },
+        'name': {
+            'type': 'string'
+        },
+        'locomotive': {
+            'type': 'string'
+        },
+        'manufacturer': {
+            'type': 'string'
+        },
+        'throttle_max': {
+            'type': 'number',
+            'format': 'float'
+        },
+        'address': {
+            'type': 'string'
+        },
         'status': {
             'type': 'string'
         },
