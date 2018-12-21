@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-    trainapi.views
+    trainapi.api.views
     ~~~~~~~~~~~~~~
 
     This module instantiates the trainapi

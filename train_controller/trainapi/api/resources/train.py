@@ -14,7 +14,7 @@ from flask_restful_swagger_2 import swagger, Resource
 from flask import request
 
 import trainapi.config as cfg
-import trainapi.commons.locomotive as display
+import trainapi.drivers as display
 import trainapi.commons.exceptions as e
 
 from trainapi.models import TrainModel, TrainError
