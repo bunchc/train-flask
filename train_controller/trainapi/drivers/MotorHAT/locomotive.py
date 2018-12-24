@@ -13,8 +13,15 @@
 """
 
 import trainapi.config as cfg
-from trainapi.extensions import mh
 import time
+
+from adafruit_motorkit import MotorKit
+mh = {addr: MotorKit(address=addr) for addr in list(set([ train['driver_config']['address'] for train in cfg.trains ]))}
+# If power_pin is specified, import the GPIO library and configure the power device
+power_pin = [driver['power_pin'] for driver in cfg.drivers if driver['driver'].lower() == "motorhat" and 'power_pin' in driver][0]
+if (power_pin):
+    from gpiozero import OutputDevice
+    powerdevice = OutputDevice(power_pin)
 
 def haltTrains():
     """Halts all trains. Throttle is set to 0 with no deceleration. This may cause cars to become derailed.
