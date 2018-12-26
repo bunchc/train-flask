@@ -61,6 +61,10 @@ class TrainError(swagger.Schema):
         },
         'description': {
             'type': 'string'
+        },
+        'response': {
+            'type': 'integer',
+            'format': 'int64'
         }
     }
-    required = ['errorId']
+    required = ['errorID']

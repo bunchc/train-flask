@@ -148,20 +148,22 @@ class TrainControl(Resource):
         action = request.json.get('action', None)
         direction = request.json.get('direction', 'forward')
         speed = request.json.get('speed', 7.5)
-
-        if (not action in dir(display)):
+        all_actions = [dir(getattr(display, "{}".format(driver)).locomotive) for driver in display.drivers_enabled]
+        driver = getattr(display, "{}".format([train['driver_config']['driver'] for train in cfg.trains if train['id'] == locomotive_id][0])).locomotive
+        
+        if (not action in [verb for actions in all_actions for verb in actions]):
             return TrainError(**e.error[5]), e.error[5]['response']
         elif action == "haltTrains":
-            trains = display.haltTrains()
+            trains = driver.haltTrains()
             return list(map(lambda train: TrainModel(**train), trains)), 200
         elif action == "stopAllTrains":
-            trains = display.stopAllTrains()
+            trains = driver.stopAllTrains()
             return list(map(lambda train: TrainModel(**train), trains)), 200
         elif action == "startAllTrains":
             if not speed or not direction:
                 return TrainError(**e.error[6]), e.error[6]['response']
             else:
-                trains = display.startAllTrains(direction, speed)
+                trains = driver.startAllTrains(direction, speed)
             return list(map(lambda train: TrainModel(**train), trains)), 200
         else:
             if (not locomotive_id):
@@ -171,21 +173,21 @@ class TrainControl(Resource):
                     if not speed or not direction:
                         return TrainError(**e.error[6]), e.error[6]['response']
                     else:
-                        train = display.startTrain(locomotive_id, direction, speed)
+                        train = driver.startTrain(locomotive_id, direction, speed)
                         return TrainModel(**train), 200
                 elif action == "stopTrain":
-                    train = display.stopTrain(locomotive_id)
+                    train = driver.stopTrain(locomotive_id)
                     return TrainModel(**train), 200
                 elif action == "accelerate":
                     if not speed:
                         return TrainError(**e.error[6]), e.error[6]['response']
                     else:
-                        train = display.accelerate(locomotive_id, speed)
+                        train = driver.accelerate(locomotive_id, speed)
                         return TrainModel(**train), 200
                 elif action == "decelerate":
                     if not speed:
                         return TrainError(**e.error[6]), e.error[6]['response']
                     else:
-                        train = display.decelerate(locomotive_id, speed)
+                        train = driver.decelerate(locomotive_id, speed)
                         return TrainModel(**train), 200
             

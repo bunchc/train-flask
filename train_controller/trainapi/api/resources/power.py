@@ -13,10 +13,12 @@
 from flask import request
 from flask_restful_swagger_2 import swagger, Resource
 
-from trainapi.extensions import powerdevice
+import trainapi.drivers
 from trainapi.commons.pagination import paginate
 from trainapi.models import PowerModel
 import trainapi.commons.exceptions as e
+
+powerdevice = trainapi.drivers.MotorHAT.locomotive.powerdevice
 
 class PowerStatus(Resource):
     @swagger.doc({
