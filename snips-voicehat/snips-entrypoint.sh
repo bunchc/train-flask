@@ -215,6 +215,33 @@ nodaemon=true
 EOT
 
 
+# Generate snips-skill-server
+SKILL_PATH=/var/lib/snips/skills/
+if [ "${SNIPS_COMPONENTS['snips-skill-server']}" = true ]
+then
+    if [ -z "$(ls -A ${SKILL_PATH})" ]
+    then
+        echo "Couldn't find any skill"
+        exit 1
+    fi
+    echo Spawning /usr/bin/snips-skill-server $LOGLEVEL $SNIPS_MQTT_FLAG
+    cat <<EOT >> $SUPERVISORD_CONF_FILE
+
+[program:snips-asr-google]
+command=/usr/bin/snips-skill-server $LOGLEVEL $SNIPS_MQTT_FLAG
+autorestart=true
+directory=/root
+environment=RUMQTT_READ_TIMEOUT_MS="50"
+stderr_logfile=/dev/fd/1
+stderr_logfile_maxbytes=0
+stdout_logfile=/dev/fd/1
+stdout_logfile_maxbytes=0
+EOT
+else
+    echo "snips-skill-server is disabled"
+fi
+
+
 # Generate snips-asr-google
 if [ "${SNIPS_COMPONENTS['snips-asr-google']}" = true ]
 then
