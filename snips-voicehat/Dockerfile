@@ -35,5 +35,6 @@ RUN cd AIY-projects-python \
     && scripts/install-alsa-config.sh
 
 COPY snips.toml /etc/snips.toml
+COPY snips-entrypoint.sh /opt/snips/snips-entrypoint.sh
 
 ENTRYPOINT ["/opt/snips/snips-entrypoint.sh"]
