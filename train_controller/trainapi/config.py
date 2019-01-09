@@ -19,7 +19,7 @@ drivers = [
         # Optional: If using the Adafruit or similar
         # relay to control power for the display,
         # specify the GPIO pin it is connected to.
-        "power_pin": 16
+        "power_pin": 5
     },
     {
         # Dummy driver
@@ -28,7 +28,7 @@ drivers = [
         # The dummy driver provides all the same functionality
         # But returns dummy data.
         "driver": "Dummy",
-        "enabled": False,
+        "enabled": False
     },
     {
         # DCC Driver
@@ -40,7 +40,7 @@ drivers = [
         # TMCC Driver
         # TODO: Placeholder for Lionel TMCC Driver
         "driver": "TMCC",
-        "enabled": False,
+        "enabled": False
     }
 ]
 
