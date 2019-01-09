@@ -19,6 +19,7 @@ services:
       - "/dev/snd:/dev/snd"
     volumes:
       - ${PWD}/snips-voicehat/assistant:/usr/share/snips/assistant
+      - ${PWD}/snips-voicehat/skills:/var/lib/snips/skills
     depends_on:
       - train-flask
     command: "--include-components snips-asr,snips-audio-server,snips-tts,snips-hotword,snips-dialogue,snips-analytics,snips-nlu,snips-skill-server"
