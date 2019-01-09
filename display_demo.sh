@@ -68,7 +68,7 @@ while true; do
     e_arrow $(
         curl --silent -X POST \
             -H "Content-Type: application/json" \
-            -d '{"action": "startTrain", "locomotive_id": 2, "direction": "forward", "speed": 4}' \
+            -d '{"action": "startTrain", "locomotive_id": 2, "direction": "forward", "speed": 3}' \
             http://train-controller.local:5000/api/v1/train
     )
 
@@ -76,7 +76,7 @@ while true; do
     e_arrow $(
         curl --silent -X POST \
             -H "Content-Type: application/json" \
-            -d '{"action": "startTrain", "locomotive_id": 4, "direction": "forward", "speed": 5}' \
+            -d '{"action": "startTrain", "locomotive_id": 4, "direction": "forward", "speed": 6}' \
             http://train-controller.local:5000/api/v1/train
     )
 
@@ -100,7 +100,7 @@ while true; do
     e_arrow $(
         curl --silent -X POST \
             -H "Content-Type: application/json" \
-            -d '{"action": "accelerate", "locomotive_id": 2, "speed": 5}' \
+            -d '{"action": "accelerate", "locomotive_id": 2, "speed": 4}' \
             http://train-controller.local:5000/api/v1/train
     )
 
