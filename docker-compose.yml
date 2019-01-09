@@ -18,9 +18,7 @@ services:
     devices:
       - "/dev/snd:/dev/snd"
     volumes:
-      - ${PWD}/assistant:/usr/share/snips/assistant
+      - ${PWD}/snips-voicehat/assistant:/usr/share/snips/assistant
     depends_on:
       - train-flask
-    entrypoint:
-      - --include-components
-      - snips-asr,snips-audio-server,snips-tts,snips-hotword,snips-dialogue,snips-analytics
+    command: "--include-components snips-asr,snips-audio-server,snips-tts,snips-hotword,snips-dialogue,snips-analytics,snips-nlu"
