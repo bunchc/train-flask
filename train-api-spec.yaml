@@ -1,0 +1,155 @@
+openapi: 3.0.0
+info:
+  title: Train Control API
+  description: REST API to control model trains.
+  version: 0.0.1
+
+paths:
+  /power:
+    get:
+      tags:
+        - Power
+      summary: Returns the power state of the layout
+      description: Returns the power state of the layout
+      responses:
+        '200':
+          description: boolean True or False
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /power/{trainId}:
+    get:
+      tags:
+        - Train
+        - Power
+      summary: Gets the power status of a given train.
+      description: >
+        Gets the power status of a given train
+      parameters:
+        - name: trainId
+          in: path
+          description: Train ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: boolean describing a trains current status
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /train:
+    get:
+      tags:
+        - Train
+      summary: Returns a JSON arry of configured trains.
+      description: >
+        Returns a JSON array of all trains currently configured.
+      responses:
+        '200':
+          description: Returns a JSON arry of configured trains.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Train'
+  /train/{trainID}:
+    get:
+      tags:
+        - Train
+      summary: Returns the status of a specific train.
+      description: >
+        Returns the status of a specific train
+      parameters:
+        - name: trainID
+          in: path
+          description: Train ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Returns the status of {trainId}.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Train'
+  /train/{trainID}/{action}:
+    post:
+      tags:
+        - Train
+      summary: Performs an action on a given train.
+      description: >
+        Performs an action on a train. A list of actions can be returned
+        by sending a GET request to /train/{trainID}
+        start  - Accelerates a train to a given speed in a given direction
+      parameters:
+        - name: trainID
+          in: path
+          description: Train ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: action
+          in: path
+          description: Action to perform on a train.
+          required: true
+          schema:
+            type: string
+            
+      requestBody:
+        description: Parameters for a given action
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/Speed'
+                - $ref: '#/components/schemas/Start'
+                - $ref: '#/components/schemas/Stop'
+      responses:
+        '201':
+          description: Action performed successfully
+
+components:
+  schemas:
+    trainId:
+      type: integer
+    Train:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        driver:
+          type: string
+        status:
+          type: string
+      required:
+        - id
+        - name
+    Speed:
+      type: object
+      properties:
+        speed:
+          type: integer
+          format: int64
+        direction:
+          type: string
+    Start:
+      type: object
+      properties:
+        speed:
+          type: integer
+          format: int64
+        direction:
+          type: string
+    Stop:
+      type: boolean
+

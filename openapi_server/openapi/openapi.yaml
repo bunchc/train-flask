@@ -1,0 +1,185 @@
+openapi: 3.0.0
+info:
+  description: REST API to control model trains.
+  title: Train Control API
+  version: 0.0.1
+servers:
+- url: /
+paths:
+  /power:
+    get:
+      description: Returns the power state of the layout
+      operationId: power_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: boolean
+          description: boolean True or False
+      summary: Returns the power state of the layout
+      tags:
+      - Power
+      x-openapi-router-controller: openapi_server.controllers.power_controller
+  /power/{trainId}:
+    get:
+      description: |
+        Gets the power status of a given train
+      operationId: power_train_id_get
+      parameters:
+      - description: Train ID
+        explode: false
+        in: path
+        name: trainId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: boolean
+          description: boolean describing a trains current status
+      summary: Gets the power status of a given train.
+      tags:
+      - Train
+      - Power
+      x-openapi-router-controller: openapi_server.controllers.train_controller
+  /train:
+    get:
+      description: |
+        Returns a JSON array of all trains currently configured.
+      operationId: train_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Train'
+          description: Returns a JSON arry of configured trains.
+      summary: Returns a JSON arry of configured trains.
+      tags:
+      - Train
+      x-openapi-router-controller: openapi_server.controllers.train_controller
+  /train/{trainID}:
+    get:
+      description: |
+        Returns the status of a specific train
+      operationId: train_train_idget
+      parameters:
+      - description: Train ID
+        explode: false
+        in: path
+        name: trainID
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Train'
+          description: Returns the status of {trainId}.
+      summary: Returns the status of a specific train.
+      tags:
+      - Train
+      x-openapi-router-controller: openapi_server.controllers.train_controller
+  /train/{trainID}/{action}:
+    post:
+      description: |
+        Performs an action on a train. A list of actions can be returned by sending a GET request to /train/{trainID} start  - Accelerates a train to a given speed in a given direction
+      operationId: train_train_id_action_post
+      parameters:
+      - description: Train ID
+        explode: false
+        in: path
+        name: trainID
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      - description: Action to perform on a train.
+        explode: false
+        in: path
+        name: action
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - $ref: '#/components/schemas/Speed'
+              - $ref: '#/components/schemas/Start'
+              - $ref: '#/components/schemas/Stop'
+        description: Parameters for a given action
+        required: true
+      responses:
+        "201":
+          description: Action performed successfully
+      summary: Performs an action on a given train.
+      tags:
+      - Train
+      x-openapi-router-controller: openapi_server.controllers.train_controller
+components:
+  schemas:
+    trainId:
+      type: integer
+    Train:
+      example:
+        driver: driver
+        name: name
+        id: 0
+        status: status
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+        name:
+          title: name
+          type: string
+        driver:
+          title: driver
+          type: string
+        status:
+          title: status
+          type: string
+      required:
+      - id
+      - name
+      title: Train
+      type: object
+    Speed:
+      properties:
+        speed:
+          format: int64
+          title: speed
+          type: integer
+        direction:
+          title: direction
+          type: string
+      title: Speed
+      type: object
+    Start:
+      properties:
+        speed:
+          format: int64
+          title: speed
+          type: integer
+        direction:
+          title: direction
+          type: string
+      title: Start
+      type: object
+    Stop:
+      type: boolean
